@@ -26,9 +26,10 @@ From 1.18, MicroK8s now has an official Windows installer, which is the
 recommended way to install MicroK8s
 
 1. **Enable Hyper-V**
-    If you have not previously done so, you should enable the Hyper-V
-    hypervisor feature in Windows 10. To do so, please follow the
-    instructions on the [MicroSoft website][hyper-v].
+    If you have not previously done so, you can enable the Hyper-V
+    hypervisor feature in Windows 10.  This will avoid a reboot during
+    the install process. To do so, please follow the instructions on
+    the [Microsoft website][hyper-v].
 
 1.  **Download the installer**
 
@@ -39,23 +40,46 @@ recommended way to install MicroK8s
 
     Once the installer is downloaded, run it to begin installation.
 
-    You will be asked a few questions as usual when installing software. Some
-    things to note:
-
-    ![](https://assets.ubuntu.com/v1/141d9f8b-winmk8s-01.png)
-
-    We recommend installing for 'All users'
+    The installer will ask for administritive privilages.  This is in order to check the status of Hyper-V and enable it if necessary.
 
     ![](https://assets.ubuntu.com/v1/c7d0a5a7-winmk8s-03.png)
 
-    The installer also requires the Ubuntu VM system, [Multipass][], to be
+    The installer also requires the Ubuntu VM system, [Multipass][multipass], to be
     installed. This will be done automatically when you click 'Yes' here.
+
+1.  **Setup MicroK8s**
+
+    After MicroK8s has extracted, you'll be asked to start with default settings.  If you'd you'd like to tailor the settings,
+    you can untick and define you own values for the VM later on.
+
+    ![](https://assets.ubuntu.com/v1/4473ec87-installer-ask-setup.PNG)
+
+    If you selected default setup the VM will be started immediately.
+
+    ![](https://assets.ubuntu.com/v1/714cfc09-installer-auto-setup.png)
 
 1.  **Open the command line:**
 
-    Use PowerShell or the standard Windows 'cmd' to open a commandline.
+    Use PowerShell or the standard Windows 'cmd' to open a commandline.  If you didn't setup MicroK8s during the install, you'll
+    need to open your commandline with Administrative Privileges.
 
     ![](https://assets.ubuntu.com/v1/a5fe14a5-winmk8s-04.png)
+
+1. **Manually setup MicroK8s**
+
+    If you setup MicroK8s in the installer, you can skip this step.
+
+    The following arguments can be used with `microk8s install` to tailor your needs.
+
+    - `--cpu`: Cores used by MicroK8s
+    - `--mem`: RAM in GB used by MicroK8s
+    - `--disk`: Maximum volume in GB of the dynamically expandable hard disk to be used
+    - `--channel`: Kubernetes version to install
+
+    ![](https://assets.ubuntu.com/v1/f89df5c5-installer-manual-setup.png)
+
+    The setup will check that [Hyper-V][hyper-v] is enabled and enable it if not.  It will do the same for [Multipass][multipass].  After
+    which, the MicroK8s VM will be started with the resources specified.
 
 1.  **Check MicroK8s is running**
 
@@ -74,7 +98,6 @@ recommended way to install MicroK8s
 ### Uninstalling
 
 To uninstall MicroK8s on Windows 10, please [follow this guide][uninstall].
-
 
 <a id="macos"> </a>
 ## macOS
