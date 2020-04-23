@@ -163,6 +163,32 @@ The recommended way to install MicroK8s on MacOS is with Homebrew
     microk8s status --wait-ready
     ```
 
+1. **Use your local kubectl**
+
+    MicroK8s comes with its own [kubectl][kubectl], which can be accessed with the following.
+
+    ```
+    microk8s kubectl
+    ```
+
+    If you'd prefer to use your host's [kubectl][kubectl], running the following command will output the kubeconfig file from MicroK8s.
+
+    ```
+    microk8s config
+    ```
+
+    This is recommended when working with files, as it negates needing to copy files into the VM.  To install the Windows version of [kubectl][kubectl], see
+    the [official documentation][kubectl-macos-install]
+
+    To write this where it needs to be, open a Terminal window and run the following.
+
+   ```
+    cd $HOME
+    mkdir .kube
+    cd .kube
+    microk8s config > config
+   ```
+
 1.  **Congrats!**
 
     MicroK8s is now running! Continue to explore by following the
@@ -345,4 +371,5 @@ For an example, see this [answer on askubuntu][askubuntu].
 [hyper-v]: https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v
 [kubectl]: https://kubernetes.io/docs/reference/kubectl/overview/
 [kubectl-win-install]: https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-windows
+[kubectl-macos-install]: https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-macos
 <!-- FEEDBACK -->
